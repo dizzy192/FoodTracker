@@ -217,7 +217,7 @@ async def handle_food(update: Update, context: ContextTypes.DEFAULT_TYPE):
         pass
 
     if not data:
-        msg = await update.message.reply_text("Исчерпан лимит запросов.Попробуй позже.")
+        msg = await update.message.reply_text("Исчерпан лимит запросов. Попробуй позже.")
         save_last_msg(user_id, msg.message_id)
         return
 
