@@ -346,8 +346,8 @@ async def button_callback(update: Update, context: ContextTypes.DEFAULT_TYPE):
     await save_last_bot_message(user_id, msg.message_id)
 
 # ─── MAIN ─────────────────────────────────────────────────────────────────────
-async def main():
-    await init_db()
+def main():
+    asyncio.get_event_loop().run_until_complete(init_db())
 
     app = Application.builder().token(TELEGRAM_TOKEN).build()
 
@@ -359,16 +359,7 @@ async def main():
     app.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, handle_food))
 
     logger.info("Bot started!")
-    await app.run_polling(drop_pending_updates=True)
+    app.run_polling(drop_pending_updates=True)
 
 if __name__ == "__main__":
-    import sys
-    if sys.platform == "win32":
-        asyncio.set_event_loop_policy(asyncio.WindowsSelectorEventLoopPolicy())
-    app_instance = None
-    loop = asyncio.new_event_loop()
-    asyncio.set_event_loop(loop)
-    try:
-        loop.run_until_complete(main())
-    finally:
-        loop.close()
+    main()
