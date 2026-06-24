@@ -25,7 +25,7 @@ logger = logging.getLogger(__name__)
 
 # ─── GEMINI ───────────────────────────────────────────────────────────────────
 genai.configure(api_key=GEMINI_API_KEY)
-model = genai.GenerativeModel("gemini-1.5-flash")
+model = genai.GenerativeModel("gemini-1.5-flash-latest")
 
 PROMPT = """Ты эксперт-диетолог. Пользователь написал что съел.
 Верни ТОЛЬКО JSON без markdown и пояснений:
